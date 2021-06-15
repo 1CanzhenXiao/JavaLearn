@@ -3,8 +3,11 @@ package calendar2;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 class Calendar{
+    static Frame frame;
     static TextArea textarea;
     static Panel panel;
     static TextField textfield;
@@ -12,14 +15,19 @@ class Calendar{
     //全部static的原因是为了让print方法直接调用
 
     public void init(){
-        Frame frame = new Frame("万年历");
+        frame = new Frame("万年历");
         textarea = new TextArea(20,70);     //创建多行文本框
         panel = new Panel();
         textfield = new TextField(20);
         ok = new Button("确认");
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
 
-        ok.addActionListener(new ActionListener() {
-
+        ok.addActionListener(new ActionListener() {     //匿名内部类实现接口
 
             public void actionPerformed(ActionEvent e) {
 
@@ -71,6 +79,7 @@ class Calendar{
         panel.add(ok);
         frame.add(panel,BorderLayout.SOUTH);
         frame.add(textarea);
+
         frame.pack();   //每次都要调整到最佳大小
         frame.setVisible(true);     //让frame可见
     }
