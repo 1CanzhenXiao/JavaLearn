@@ -11,6 +11,7 @@ public class Main1 {
     public static void main(String[] args) {
         File f = new File("F:/javaIOtest/mkdirsTest/1/2/3/4.txt");
         try (Writer w = new FileWriter(f);
+             //缓存字符输出流
              PrintWriter p = new PrintWriter(w)){
              p.println("写文件，一行一行");
              //若要将数据立即写入文件得用flush
